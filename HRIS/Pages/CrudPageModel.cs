@@ -21,8 +21,9 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
             Items = null;
             CurrentItem = null;
             NewItem = new T();
+            OnNew();
         } else if (id == 0) {
-            Items = _context.Set<T>().ToList();
+            GetAll();
             CurrentItem = null;
             NewItem = null;
         } else {
@@ -32,14 +33,28 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
         }
     }
 
+    public virtual void GetAll() {
+        Items = _context.Set<T>().ToList();
+    }
+
+    public virtual void PreSave() {
+        
+    }
+
+    public virtual void OnNew() {
+
+    }
+
     public virtual IActionResult OnPost() {
         if (NewItem != null && NewItem.Id == -1) {
             NewItem.Id = 0;
             _context.Set<T>().Add(NewItem);
+            PreSave();
         } else if (CurrentItem != null) {
             var entity = _context.Set<T>().FirstOrDefault(x => x.Id == CurrentItem.Id);
             if (entity != null) {
                 entity.Copy(CurrentItem);
+                
             }
         }
 
