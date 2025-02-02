@@ -1,0 +1,16 @@
+﻿@page
+@model CurrentEmployeeReportPageModel
+@{
+    ViewData["Title"] = "Кадровий звiт";
+}
+
+    <form asp-area="" asp-page="/CurrentEmployeeReportPageModel" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label asp-for="SearchCriteria">Співробітник (опцiонально)</label>
+            <input asp-for="SearchCriteria" class="form-control"/>
+        </div>
+        <button type="submit">Згенерувати звiт</button>
+    </form>
+
+
