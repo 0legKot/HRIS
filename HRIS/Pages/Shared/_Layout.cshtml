@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HRIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HRIS.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">HRIS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Довiдники</a>
+                            <ul class="dropdown-menu" aria-labelledby="menu1">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/EmployeesScientificDegreePageModel">Робiтники</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/FacultyPageModel">Факультети</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/PersonPageModel">Фiзичнi особи</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/PositionPageModel">Посади</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/ScientificDegreePageModel">Освiтнiй рiвень</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/ScientificTitlePageModel">Науковi звання</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/SpecialtyPageModel">Спецiальностi</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/StuffSchedulePageModel">Розклад</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/UnitPageModel">Пiдроздiли</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/UnitsGroupPageModel">Вiддiли</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/VnzListPageModel">Навчальнi заклади</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">Документи</a>
+                            <ul class="dropdown-menu" aria-labelledby="menu2">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/DismissalPageModel">Звiльнення</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/EmploymentPageModel">Прийом</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/JobChangePageModel">Перемiщення</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">Звiти</a>
+                            <ul class="dropdown-menu" aria-labelledby="menu3">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/CurrentEmployeeReportPageModel">Кадровий</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/NewEmployeeReportPageModel">Прийнятi</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - HRIS - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

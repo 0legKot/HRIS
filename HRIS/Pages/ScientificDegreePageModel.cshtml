@@ -1,0 +1,56 @@
+﻿@page
+@model ScientificDegreePageModel
+@{
+    ViewData["Title"] = "Освiтнi рiвнi";
+}
+@if (Model.NewItem != null) {
+    <form asp-area="" asp-page="/ScientificDegreePageModel" method="post">
+        @Html.AntiForgeryToken()
+        <div>
+            <input asp-for="NewItem.Id" hidden value="-1" />
+        </div>
+        <div>
+            <label asp-for="NewItem.ScientificDegreeName"></label>
+            <input asp-for="NewItem.ScientificDegreeName" />
+        </div>
+        <div>
+            <label asp-for="NewItem.ScientificDegreeNameFull"></label>
+            <input asp-for="NewItem.ScientificDegreeNameFull" />
+        </div>
+        <button type="submit">Save</button>
+    </form>
+} else if (Model.CurrentItem == null) {
+    <a class="nav-link text-dark" asp-area="" asp-page="/ScientificDegreePageModel" asp-route-id="-1">New</a>
+    <div class="text-center">
+        <table class="table table-bordered">
+            <tr>
+                <th>Degree</th>
+                <th>Description</th>
+            </tr>
+            @foreach (var degree in Model.Items!) {
+                <tr>
+                    <td>@degree.ScientificDegreeName</td>
+                    <td>@degree.ScientificDegreeNameFull</td>
+                    <td><a class="nav-link text-dark" asp-area="" asp-page="/ScientificDegreePageModel" asp-route-id="@degree.Id">Details</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+} else {
+    <form asp-area="" asp-page="/ScientificDegreePageModel" method="post">
+        @Html.AntiForgeryToken()
+        <div>
+            <input asp-for="CurrentItem.Id" hidden />
+        </div>
+        <div>
+            <label asp-for="CurrentItem.ScientificDegreeName"></label>
+            <input asp-for="CurrentItem.ScientificDegreeName" />
+        </div>
+        <div>
+            <label asp-for="CurrentItem.ScientificDegreeNameFull"></label>
+            <input asp-for="CurrentItem.ScientificDegreeNameFull" />
+        </div>
+        <button type="submit">Save</button>
+    </form>
+}
+
