@@ -1,0 +1,122 @@
+﻿@page
+@model JobChangePageModel
+@{
+    ViewData["Title"] = "Наказ про зміну роботи";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати наказ про зміну роботи</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/JobChangePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="SelectedEmployeeId" class="form-label">Співробітник</label>
+                        <select asp-for="SelectedEmployeeId" asp-items="Model.Employees" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedNewPositionId" class="form-label">Нова посада</label>
+                        <select asp-for="SelectedNewPositionId" asp-items="Model.Positions" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedNewUnitId" class="form-label">Новий підрозділ</label>
+                        <select asp-for="SelectedNewUnitId" asp-items="Model.Units" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.JobChangeDate" class="form-label"></label>
+                        <input asp-for="NewItem.JobChangeDate" class="form-control" type="date" />
+                        <span asp-validation-for="NewItem.JobChangeDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.NewWorkingRates" class="form-label"></label>
+                        <input asp-for="NewItem.NewWorkingRates" class="form-control" />
+                        <span asp-validation-for="NewItem.NewWorkingRates" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/JobChangePageModel" asp-route-id="-1">Новий наказ про зміну роботи</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Співробітник</th>
+                        <th>Нова посада</th>
+                        <th>Новий підрозділ</th>
+                        <th>Дата зміни роботи</th>
+                        <th>Новий коефіцієнт</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items) {
+                        <tr>
+                            <td>@item.Employee.EmployeePerson.PersonNameFull</td>
+                            <td>@item.NewPosition.PositionName</td>
+                            <td>@item.NewUnit.UnitName</td>
+                            <td>@item.JobChangeDate.ToString("dd.MM.yyyy")</td>
+                            <td>@item.NewWorkingRates</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/JobChangePageModel" asp-route-id="@item.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування наказу про зміну роботи</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/JobChangePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.JobChangeDate" class="form-label"></label>
+                        <input asp-for="CurrentItem.JobChangeDate" class="form-control" type="date" />
+                        <span asp-validation-for="CurrentItem.JobChangeDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.NewWorkingRates" class="form-label"></label>
+                        <input asp-for="CurrentItem.NewWorkingRates" class="form-control" />
+                        <span asp-validation-for="CurrentItem.NewWorkingRates" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Співробітник</label>
+                        <input class="form-control" readonly value="@Model.CurrentItem.Employee.EmployeePerson.PersonNameFull" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Нова посада</label>
+                        <input class="form-control" readonly value="@Model.CurrentItem.NewPosition.PositionName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Новий підрозділ</label>
+                        <input class="form-control" readonly value="@Model.CurrentItem.NewUnit.UnitName" />
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+                <div class="mt-4">
+                    <h5>Детальна інформація</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Співробітник</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.Employee.EmployeePerson.PersonNameFull</dd>
+                        <dt class="col-sm-3">Нова посада</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.NewPosition.PositionName</dd>
+                        <dt class="col-sm-3">Новий підрозділ</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.NewUnit.UnitName</dd>
+                        <dt class="col-sm-3">Дата зміни роботи</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.JobChangeDate.ToString("dd.MM.yyyy")</dd>
+                        <dt class="col-sm-3">Новий коефіцієнт</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.NewWorkingRates</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+</div>
