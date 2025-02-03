@@ -21,27 +21,31 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
             Items = null;
             CurrentItem = null;
             NewItem = new T();
-            OnNew();
+            PreFetch();
         } else if (id == 0) {
-            GetAll();
+            Items = GetAll().ToList();
             CurrentItem = null;
             NewItem = null;
         } else {
             Items = null;
-            CurrentItem = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+            PreFetch();
+            CurrentItem = GetAll().FirstOrDefault(x => x.Id == id);
+            PostFetch();
             NewItem = null;
         }
     }
 
-    public virtual void GetAll() {
-        Items = _context.Set<T>().ToList();
-    }
+    public virtual IQueryable<T> GetAll() => _context.Set<T>();
 
     public virtual void PreSave() {
         
     }
 
-    public virtual void OnNew() {
+    public virtual void PreFetch() {
+
+    }
+
+    public virtual void PostFetch() {
 
     }
 

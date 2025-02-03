@@ -1,0 +1,343 @@
+﻿@page
+@model PersonPageModel
+@{
+    ViewData["Title"] = "Фізичні особи";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати нову фізичну особу</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/PersonPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PersonName" class="form-label"></label>
+                        <input asp-for="NewItem.PersonName" class="form-control" />
+                        <span asp-validation-for="NewItem.PersonName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PersonNameFull" class="form-label"></label>
+                        <input asp-for="NewItem.PersonNameFull" class="form-control" />
+                        <span asp-validation-for="NewItem.PersonNameFull" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.IsMale" class="form-label"></label>
+                        <input asp-for="NewItem.IsMale" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.IsMale" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.MaritalStatus" class="form-label"></label>
+                        <input asp-for="NewItem.MaritalStatus" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.MaritalStatus" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.BirthDate" class="form-label"></label>
+                        <input asp-for="NewItem.BirthDate" class="form-control" type="date" />
+                        <span asp-validation-for="NewItem.BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.Residence" class="form-label"></label>
+                        <input asp-for="NewItem.Residence" class="form-control" />
+                        <span asp-validation-for="NewItem.Residence" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PhoneNumber" class="form-label"></label>
+                        <input asp-for="NewItem.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="NewItem.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.MilitaryRegistrationStatus" class="form-label"></label>
+                        <input asp-for="NewItem.MilitaryRegistrationStatus" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.MilitaryRegistrationStatus" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.IsPensioner" class="form-label"></label>
+                        <input asp-for="NewItem.IsPensioner" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.IsPensioner" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.HasChildren" class="form-label"></label>
+                        <input asp-for="NewItem.HasChildren" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.HasChildren" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.IdentificationNumber" class="form-label"></label>
+                        <input asp-for="NewItem.IdentificationNumber" class="form-control" />
+                        <span asp-validation-for="NewItem.IdentificationNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PassportNumber" class="form-label"></label>
+                        <input asp-for="NewItem.PassportNumber" class="form-control" />
+                        <span asp-validation-for="NewItem.PassportNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PassportSeries" class="form-label"></label>
+                        <input asp-for="NewItem.PassportSeries" class="form-control" />
+                        <span asp-validation-for="NewItem.PassportSeries" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PassportIssueDate" class="form-label"></label>
+                        <input asp-for="NewItem.PassportIssueDate" class="form-control" type="date" />
+                        <span asp-validation-for="NewItem.PassportIssueDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PassportIssuePlace" class="form-label"></label>
+                        <input asp-for="NewItem.PassportIssuePlace" class="form-control" />
+                        <span asp-validation-for="NewItem.PassportIssuePlace" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PersonEducation" class="form-label"></label>
+                        <input asp-for="NewItem.PersonEducation" class="form-control" />
+                        <span asp-validation-for="NewItem.PersonEducation" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.PersonQualification" class="form-label"></label>
+                        <input asp-for="NewItem.PersonQualification" class="form-control" />
+                        <span asp-validation-for="NewItem.PersonQualification" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DiplomaNumber" class="form-label"></label>
+                        <input asp-for="NewItem.DiplomaNumber" class="form-control" />
+                        <span asp-validation-for="NewItem.DiplomaNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DateOfGraduation" class="form-label"></label>
+                        <input asp-for="NewItem.DateOfGraduation" class="form-control" type="date" />
+                        <span asp-validation-for="NewItem.DateOfGraduation" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.Category" class="form-label"></label>
+                        <input asp-for="NewItem.Category" class="form-control" />
+                        <span asp-validation-for="NewItem.Category" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.Discharge" class="form-label"></label>
+                        <input asp-for="NewItem.Discharge" class="form-control" />
+                        <span asp-validation-for="NewItem.Discharge" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedFacultyId" class="form-label"></label> 
+                        <select asp-for="SelectedFacultyId" asp-items="Model.Faculties" class="form-control" /> 
+                        <span asp-validation-for="SelectedFacultyId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedScientificTitleId" class="form-label"></label> 
+                        <select asp-for="SelectedScientificTitleId" asp-items="Model.ScientificTitles" class="form-control" />
+                        <span asp-validation-for="SelectedScientificTitleId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedScientificDegreeId" class="form-label"></label> 
+                        <select asp-for="SelectedScientificDegreeId" asp-items="Model.ScientificDegrees" class="form-control" />
+                        <span asp-validation-for="SelectedScientificDegreeId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedSpecialtyId" class="form-label"></label> 
+                        <select asp-for="SelectedSpecialtyId" asp-items="Model.Specialties" class="form-control" /> 
+                        <span asp-validation-for="SelectedSpecialtyId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.IsDisabled" class="form-label"></label>
+                        <input asp-for="NewItem.IsDisabled" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="NewItem.IsDisabled" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DisabilityGroup" class="form-label"></label>
+                        <input asp-for="NewItem.DisabilityGroup" class="form-control" type="number" />
+                        <span asp-validation-for="NewItem.DisabilityGroup" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DisabledCertificate" class="form-label"></label>
+                        <input asp-for="NewItem.DisabledCertificate" class="form-control" />
+                        <span asp-validation-for="NewItem.DisabledCertificate" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/PersonPageModel" asp-route-id="-1">Нова фізична особа</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>ПІБ</th>
+                        <th>Повне ім'я</th>
+                        <th>Дата народження</th>
+                        <th>Місце проживання</th>
+                        <th>Телефон</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var person in Model.Items!) {
+                        <tr>
+                            <td>@person.PersonName</td>
+                            <td>@person.PersonNameFull</td>
+                            <td>@person.BirthDate.ToString("dd.MM.yyyy")</td>
+                            <td>@person.Residence</td>
+                            <td>@person.PhoneNumber</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/PersonPageModel" asp-route-id="@person.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування фізичної особи</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/PersonPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PersonName" class="form-label"></label>
+                        <input asp-for="CurrentItem.PersonName" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PersonName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PersonNameFull" class="form-label"></label>
+                        <input asp-for="CurrentItem.PersonNameFull" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PersonNameFull" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.IsMale" class="form-label"></label>
+                        <input asp-for="CurrentItem.IsMale" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.IsMale" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.MaritalStatus" class="form-label"></label>
+                        <input asp-for="CurrentItem.MaritalStatus" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.MaritalStatus" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.BirthDate" class="form-label"></label>
+                        <input asp-for="CurrentItem.BirthDate" class="form-control" type="date" />
+                        <span asp-validation-for="CurrentItem.BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.Residence" class="form-label"></label>
+                        <input asp-for="CurrentItem.Residence" class="form-control" />
+                        <span asp-validation-for="CurrentItem.Residence" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PhoneNumber" class="form-label"></label>
+                        <input asp-for="CurrentItem.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.MilitaryRegistrationStatus" class="form-label"></label>
+                        <input asp-for="CurrentItem.MilitaryRegistrationStatus" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.MilitaryRegistrationStatus" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.IsPensioner" class="form-label"></label>
+                        <input asp-for="CurrentItem.IsPensioner" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.IsPensioner" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.HasChildren" class="form-label"></label>
+                        <input asp-for="CurrentItem.HasChildren" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.HasChildren" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.IdentificationNumber" class="form-label"></label>
+                        <input asp-for="CurrentItem.IdentificationNumber" class="form-control" />
+                        <span asp-validation-for="CurrentItem.IdentificationNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PassportNumber" class="form-label"></label>
+                        <input asp-for="CurrentItem.PassportNumber" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PassportNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PassportSeries" class="form-label"></label>
+                        <input asp-for="CurrentItem.PassportSeries" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PassportSeries" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PassportIssueDate" class="form-label"></label>
+                        <input asp-for="CurrentItem.PassportIssueDate" class="form-control" type="date" />
+                        <span asp-validation-for="CurrentItem.PassportIssueDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PassportIssuePlace" class="form-label"></label>
+                        <input asp-for="CurrentItem.PassportIssuePlace" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PassportIssuePlace" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PersonEducation" class="form-label"></label>
+                        <input asp-for="CurrentItem.PersonEducation" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PersonEducation" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.PersonQualification" class="form-label"></label>
+                        <input asp-for="CurrentItem.PersonQualification" class="form-control" />
+                        <span asp-validation-for="CurrentItem.PersonQualification" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DiplomaNumber" class="form-label"></label>
+                        <input asp-for="CurrentItem.DiplomaNumber" class="form-control" />
+                        <span asp-validation-for="CurrentItem.DiplomaNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DateOfGraduation" class="form-label"></label>
+                        <input asp-for="CurrentItem.DateOfGraduation" class="form-control" type="date" />
+                        <span asp-validation-for="CurrentItem.DateOfGraduation" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.Category" class="form-label"></label>
+                        <input asp-for="CurrentItem.Category" class="form-control" />
+                        <span asp-validation-for="CurrentItem.Category" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.Discharge" class="form-label"></label>
+                        <input asp-for="CurrentItem.Discharge" class="form-control" />
+                        <span asp-validation-for="CurrentItem.Discharge" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedFacultyId" class="form-label"></label>
+                        <select asp-for="SelectedFacultyId" asp-items="Model.Faculties" class="form-control" />
+                        <span asp-validation-for="SelectedFacultyId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedScientificTitleId" class="form-label"></label>
+                        <select asp-for="SelectedScientificTitleId" asp-items="Model.ScientificTitles" class="form-control" />
+                        <span asp-validation-for="SelectedScientificTitleId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedScientificDegreeId" class="form-label"></label>
+                        <select asp-for="SelectedScientificDegreeId" asp-items="Model.ScientificDegrees" class="form-control" />
+                        <span asp-validation-for="SelectedScientificDegreeId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SelectedSpecialtyId" class="form-label"></label>
+                        <select asp-for="SelectedSpecialtyId" asp-items="Model.Specialties" class="form-control" />
+                        <span asp-validation-for="SelectedSpecialtyId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.IsDisabled" class="form-label"></label>
+                        <input asp-for="CurrentItem.IsDisabled" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="CurrentItem.IsDisabled" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DisabilityGroup" class="form-label"></label>
+                        <input asp-for="CurrentItem.DisabilityGroup" class="form-control" type="number" />
+                        <span asp-validation-for="CurrentItem.DisabilityGroup" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DisabledCertificate" class="form-label"></label>
+                        <input asp-for="CurrentItem.DisabledCertificate" class="form-control" />
+                        <span asp-validation-for="CurrentItem.DisabledCertificate" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

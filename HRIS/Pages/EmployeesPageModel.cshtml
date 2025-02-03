@@ -1,0 +1,122 @@
+﻿@page
+@model EmployeesPageModel
+@{
+    ViewData["Title"] = "Робiтники";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати нового співробітника</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/EmployeesPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DateDismissal" class="form-label"></label>
+                        <input asp-for="NewItem.DateDismissal" class="form-control" />
+                        <span asp-validation-for="NewItem.DateDismissal" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.DateEmployment" class="form-label"></label>
+                        <input asp-for="NewItem.DateEmployment" class="form-control" />
+                        <span asp-validation-for="NewItem.DateEmployment" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.EmployeePerson.PersonName" class="form-label"></label>
+                        <input asp-for="NewItem.EmployeePerson.PersonName" class="form-control" />
+                        <span asp-validation-for="NewItem.EmployeePerson.PersonName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.EmployeeWorkingRate" class="form-label"></label>
+                        <input asp-for="NewItem.EmployeeWorkingRate" class="form-control" />
+                        <span asp-validation-for="NewItem.EmployeeWorkingRate" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/EmployeesPageModel" asp-route-id="-1">Новий співробітник</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>ПІБ</th>
+                        <th>Дата звільнення</th>
+                        <th>Дата прийняття на роботу</th>
+                        <th>Зарплата</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in Model.Items!) {
+                        <tr>
+                            <td>@emp.EmployeePerson.PersonName</td>
+                            <td>@emp.DateDismissal?.ToString("dd.MM.yyyy")</td>
+                            <td>@emp.DateEmployment?.ToString("dd.MM.yyyy")</td>
+                            <td>@emp.EmployeeWorkingRate</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/EmployeesPageModel" asp-route-id="@emp.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування співробітника</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/EmployeesPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DateDismissal" class="form-label"></label>
+                        <input asp-for="CurrentItem.DateDismissal" class="form-control" />
+                        <span asp-validation-for="CurrentItem.DateDismissal" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.DateEmployment" class="form-label"></label>
+                        <input asp-for="CurrentItem.DateEmployment" class="form-control" />
+                        <span asp-validation-for="CurrentItem.DateEmployment" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.EmployeePerson.PersonName" class="form-label"></label>
+                        <input asp-for="CurrentItem.EmployeePerson.PersonName" class="form-control" />
+                        <span asp-validation-for="CurrentItem.EmployeePerson.PersonName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.EmployeeWorkingRate" class="form-label"></label>
+                        <input asp-for="CurrentItem.EmployeeWorkingRate" class="form-control" />
+                        <span asp-validation-for="CurrentItem.EmployeeWorkingRate" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+                <div class="mt-4">
+                    <h5>Детальна інформація</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">ПІБ</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeePerson?.PersonName</dd>
+                        <dt class="col-sm-3">Повне ім'я</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeePerson?.PersonNameFull</dd>
+                        <dt class="col-sm-3">Дата народження</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeePerson?.BirthDate.ToString("dd.MM.yyyy")</dd>
+                        <dt class="col-sm-3">Місце проживання</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeePerson?.Residence</dd>
+                        <dt class="col-sm-3">Телефон</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeePerson?.PhoneNumber</dd>
+                        <dt class="col-sm-3">Посада</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.Position?.PositionName</dd>
+                        <dt class="col-sm-3">Підрозділ</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.Unit?.UnitName</dd>
+                        <dt class="col-sm-3">Зарплата</dt>
+                        <dd class="col-sm-9">@Model.CurrentItem.EmployeeWorkingRate</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+</div>

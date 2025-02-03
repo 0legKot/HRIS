@@ -10,11 +10,10 @@ namespace HRIS.Pages {
         public int SelectedEmployeeId { get; set; }
         public List<SelectListItem> Employees { get; set; }
         public DismissalPageModel(ApplicationDbContext applicationDbContext) : base(applicationDbContext) {}
-        public override void GetAll() {
-            Items = _context.Set<DismissalOrder>().Include(x=>x.Employee).ThenInclude(x=>x.EmployeePerson).ToList();
-            
-        }
-        public override void OnNew() {
+
+        public override IQueryable<DismissalOrder> GetAll() => _context.Set<DismissalOrder>().Include(x => x.Employee).ThenInclude(x => x.EmployeePerson);
+
+        public override void PreFetch() {
             Employees = _context.Employees.Include(x => x.EmployeePerson)
             .Select(e => new SelectListItem {
                 Value = e.Id.ToString(),
