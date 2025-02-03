@@ -3,14 +3,18 @@
 @{
     ViewData["Title"] = "Кадровий звiт";
 }
-
-    <form asp-area="" asp-page="/CurrentEmployeeReportPageModel" method="post">
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            <label asp-for="SearchCriteria">Співробітник (опцiонально)</label>
-            <input asp-for="SearchCriteria" class="form-control"/>
-        </div>
-        <button type="submit">Згенерувати звiт</button>
-    </form>
-
-
+<h1 class="mb-4">@ViewData["Title"]</h1>
+<div class="card mb-4">
+    <div class="card-header">Згенерувати кадровий звіт</div>
+    <div class="card-body">
+        <form asp-area="" asp-page="/CurrentEmployeeReportPageModel" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label asp-for="SearchCriteria" class="form-label">Співробітник (опцiонально)</label>
+                <input asp-for="SearchCriteria" class="form-control" />
+            </div>
+            
+            <button type="submit" class="btn btn-success">Згенерувати звiт</button>
+        </form>
+    </div>
+</div>

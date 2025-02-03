@@ -83,7 +83,7 @@ namespace HRIS.Pages {
             await page.SetContentAsync(s);
             var pdfBytes = await page.PdfAsync(new PagePdfOptions { Format = "A4" });
             return new FileContentResult(pdfBytes, "application/pdf") {
-                FileDownloadName = "Report.pdf"
+                FileDownloadName = $"EmployeeReport_{DateTime.Now:yyyy_MM_dd}.pdf"
             };
         }
     }
