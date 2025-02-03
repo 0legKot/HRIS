@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 public class DismissalOrder : Entity {
 
     [Column(TypeName = "date")]
+    [Display(Name = "Дата звільнення")]
     public DateTime DismissalDate { get; set; }
 
     public int EmployeeId { get; set; }

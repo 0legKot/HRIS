@@ -13,9 +13,11 @@ public class JobChangeOrder : Entity {
     public Unit? NewUnit { get; set; }
 
     [Column(TypeName = "date")]
+    [Display(Name = "Дата змiни роботи")]
     public DateTime JobChangeDate { get; set; }
 
     [Column(TypeName = "decimal(3,2)")]
+    [Display(Name = "Зарплатний коефіцієнт")]
     public decimal NewWorkingRates { get; set; }
     public override void Copy(Entity entity) {
         var copy = entity as JobChangeOrder;

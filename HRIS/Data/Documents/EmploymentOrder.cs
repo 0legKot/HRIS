@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 public class EmploymentOrder : Entity {
 
     [Column(TypeName = "date")]
+    [Display(Name = "Дата прийняття на роботу")]
     public DateTime EmploymentDate { get; set; }
 
     [Column(TypeName = "decimal(3,2)")]
+    [Display(Name = "Зарплатний коефіцієнт")]
     public decimal WorkingRates { get; set; }
-
+    
+    [Display(Name = "Плюралізм")]
     public bool Pluralist { get; set; }
 
     public int UnitId { get; set; }
