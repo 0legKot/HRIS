@@ -51,6 +51,9 @@ namespace HRIS.Pages {
         }
 
         public override void PreSave() {
+            var employee = _context.Employees.FirstOrDefault(x => x.Id == SelectedEmployeeId);
+            employee.PositionId = SelectedNewPositionId;
+            employee.UnitId = SelectedNewUnitId;
             NewItem.EmployeeId = SelectedEmployeeId;
             NewItem.NewPositionId = SelectedNewPositionId;
             NewItem.NewUnitId = SelectedNewUnitId;

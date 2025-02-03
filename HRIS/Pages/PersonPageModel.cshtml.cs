@@ -32,11 +32,19 @@ namespace HRIS.Pages {
             ScientificDegrees = _context.ScientificDegrees.Select(sd => new SelectListItem { Value = sd.Id.ToString(), Text = sd.ScientificDegreeName }).ToList();
             Specialties = _context.Specialties.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.SpecialtyName }).ToList();
         }
-        public override void PreSave() { 
-            NewItem.FacultyId = SelectedFacultyId; 
-            NewItem.ScientificTitleId = SelectedScientificTitleId; 
-            NewItem.ScientificDegreeId = SelectedScientificDegreeId; 
-            NewItem.SpecialtyId = SelectedSpecialtyId; 
+        public override void PreSave() {
+            if (NewItem != null) {
+                NewItem.FacultyId = SelectedFacultyId;
+                NewItem.ScientificTitleId = SelectedScientificTitleId;
+                NewItem.ScientificDegreeId = SelectedScientificDegreeId;
+                NewItem.SpecialtyId = SelectedSpecialtyId;
+            } 
+            if (CurrentItem != null) {
+                CurrentItem.FacultyId = SelectedFacultyId;
+                CurrentItem.ScientificTitleId = SelectedScientificTitleId;
+                CurrentItem.ScientificDegreeId = SelectedScientificDegreeId;
+                CurrentItem.SpecialtyId = SelectedSpecialtyId;
+            }
         }
 
         public override void PostFetch() {

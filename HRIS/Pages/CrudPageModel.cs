@@ -52,13 +52,13 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
     public virtual IActionResult OnPost() {
         if (NewItem != null && NewItem.Id == -1) {
             NewItem.Id = 0;
-            _context.Set<T>().Add(NewItem);
             PreSave();
+            _context.Set<T>().Add(NewItem);
         } else if (CurrentItem != null) {
             var entity = _context.Set<T>().FirstOrDefault(x => x.Id == CurrentItem.Id);
             if (entity != null) {
+                PreSave();
                 entity.Copy(CurrentItem);
-                
             }
         }
 
