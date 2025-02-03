@@ -4,8 +4,10 @@ public class UnitsGroup : Entity {
 
     [Required]
     [MaxLength(20)]
+    [Display(Name = "Назва вiддiлу")]
     public string UnitsGroupName { get; set; } = null!;
 
+    [Display(Name = "Вiддiли")]
     public ICollection<Unit>? Units { get; set; }
 
     public override void Copy(Entity entity) {

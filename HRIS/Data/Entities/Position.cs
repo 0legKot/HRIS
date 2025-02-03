@@ -4,10 +4,12 @@ public class Position : Entity {
 
     [Required]
     [MaxLength(20)]
+    [Display(Name = "Посада")]
     public string PositionName { get; set; } = null!;
 
     [Required]
     [MaxLength(100)]
+    [Display(Name = "Посада (повна назва)")]
     public string PositionNameFull { get; set; } = null!;
 
     public ICollection<StaffSchedule>? StaffSchedules { get; set; }

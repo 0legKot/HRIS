@@ -10,9 +10,11 @@ public class StaffSchedule : Entity {
     public Position? Position { get; set; }
 
     [Column(TypeName = "decimal(6,2)")]
+    [Display(Name = "Кiлкiсть посад")]
     public decimal NumberOfPositions { get; set; }
 
     [Column(TypeName = "decimal(6,2)")]
+    [Display(Name = "Кiлкiсть зайнятих посад")]
     public decimal NumberOfPositionsOccupied { get; set; }
 
     public override void Copy(Entity entity) {

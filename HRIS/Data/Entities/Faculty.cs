@@ -4,10 +4,12 @@ public class Faculty : Entity {
 
     [Required]
     [MaxLength(20)]
+    [Display(Name = "Факультет")]
     public string FacultyName { get; set; } = null!;
 
     [Required]
     [MaxLength(200)]
+    [Display(Name = "Факультет (повна назва)")]
     public string FacultyNameFull { get; set; } = null!;
 
     public int VnzId { get; set; }
