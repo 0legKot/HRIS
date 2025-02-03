@@ -1,0 +1,74 @@
+﻿@page
+@model EmploymentPageModel
+@{
+    ViewData["Title"] = "Прийняття на роботу";
+}
+@if (Model.NewItem != null) {
+    <div class="card mb-4">
+        <div class="card-header">Додати нового співробітника</div>
+        <div class="card-body">
+            <form asp-area="" asp-page="/EmploymentPageModel" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                <div class="mb-3">
+                    <label asp-for="NewItem.EmploymentDate" class="form-label"></label>
+                    <input asp-for="NewItem.EmploymentDate" class="form-control" type="date" />
+                    <span asp-validation-for="NewItem.EmploymentDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SelectedPersonId" class="form-label">Співробітник</label>
+                    <select asp-for="SelectedPersonId" asp-items="Model.People" class="form-control"></select>
+                    <span asp-validation-for="SelectedPersonId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SelectedPositionId" class="form-label">Позицiя</label>
+                    <select asp-for="SelectedPositionId" asp-items="Model.Positions" class="form-control"></select>
+                    <span asp-validation-for="SelectedPositionId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SelectedUnitId" class="form-label">Пiдроздiл</label>
+                    <select asp-for="SelectedUnitId" asp-items="Model.Units" class="form-control"></select>
+                    <span asp-validation-for="SelectedUnitId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewItem.WorkingRates" class="form-label"></label>
+                    <input asp-for="NewItem.WorkingRates" class="form-control" type="number" />
+                    <span asp-validation-for="NewItem.WorkingRates" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewItem.Pluralist" class="form-label"></label>
+                    <input asp-for="NewItem.Pluralist" class="form-check-input" type="checkbox" />
+                    <span asp-validation-for="NewItem.Pluralist" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success">Зберегти</button>
+            </form>
+        </div>
+    </div>
+} else if (Model.CurrentItem == null) {
+    <div class="mb-4">
+        <a class="btn btn-primary" asp-area="" asp-page="/EmploymentPageModel" asp-route-id="-1">Додати нового співробітника</a>
+    </div>
+    <div class="text-center table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Дата прийняття на роботу</th>
+                <th>Співробітник</th>
+                <th>Позицiя</th>
+                <th>Пiдроздiл</th>
+                <th>Зарплатний коефіцієнт</th>
+                <th>Плюралізм</th>
+            </tr>
+            @foreach (var item in Model.Items!) {
+                <tr>
+                    <td>@item.EmploymentDate.ToString("dd.MM.yyyy")</td>
+                    <td>@item.Person.PersonName</td>
+                    <td>@item.Position.PositionName</td>
+                    <td>@item.Unit.UnitName</td>
+                    <td>@item.WorkingRates</td>
+                    <td>@item.Pluralist</td>
+                </tr>
+            }
+        </table>
+    </div>
+} 
+
