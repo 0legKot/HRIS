@@ -1,0 +1,203 @@
+﻿@page
+@model HRIS.Pages.DynamicEmployeeReportPageModel
+@{
+    ViewData["Title"] = "Динамічний кадровий звіт з фільтрацією";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    <form asp-area="" asp-page="/DynamicEmployeeReportPage" method="post">
+        <div class="card mb-3">
+            <div class="card-header">Фільтри</div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">ПІБ містить</label>
+                        <input asp-for="FilterPib" class="form-control" placeholder="Пошук по ПІБ" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Повне ім'я містить</label>
+                        <input asp-for="FilterFullName" class="form-control" placeholder="Пошук по повному імені" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Місце проживання містить</label>
+                        <input asp-for="FilterResidence" class="form-control" placeholder="Пошук за місцем проживання" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Телефон містить</label>
+                        <input asp-for="FilterPhone" class="form-control" placeholder="Пошук за телефоном" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Посада містить</label>
+                        <input asp-for="FilterPosition" class="form-control" placeholder="Пошук за посадою" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Підрозділ містить</label>
+                        <input asp-for="FilterUnit" class="form-control" placeholder="Пошук за підрозділом" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Дата народження від</label>
+                        <input asp-for="FilterBirthDateFrom" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Дата народження до</label>
+                        <input asp-for="FilterBirthDateTo" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Дата прийняття від</label>
+                        <input asp-for="FilterDateEmploymentFrom" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Дата прийняття до</label>
+                        <input asp-for="FilterDateEmploymentTo" class="form-control" type="date" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Дата звільнення від</label>
+                        <input asp-for="FilterDateDismissalFrom" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Дата звільнення до</label>
+                        <input asp-for="FilterDateDismissalTo" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Зарплатний коеф. від</label>
+                        <input asp-for="FilterWorkingRateMin" class="form-control" type="number" step="0.01" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Зарплатний коеф. до</label>
+                        <input asp-for="FilterWorkingRateMax" class="form-control" type="number" step="0.01" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">Колонки для відображення</div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Основна інформація -->
+                    <div class="col-md-3">
+                        <h6>Основна інформація</h6>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePib" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePib" class="form-check-label">ПІБ</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeFullName" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeFullName" class="form-check-label">Повне ім'я</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeBirthDate" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeBirthDate" class="form-check-label">Дата народження</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeResidence" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeResidence" class="form-check-label">Місце проживання</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePhone" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePhone" class="form-check-label">Телефон</label>
+                        </div>
+                    </div>
+                    <!-- Кадрова інформація -->
+                    <div class="col-md-3">
+                        <h6>Кадрова інформація</h6>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeDateEmployment" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeDateEmployment" class="form-check-label">Дата прийняття</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeDateDismissal" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeDateDismissal" class="form-check-label">Дата звільнення</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeWorkingRate" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeWorkingRate" class="form-check-label">Зарплатний коефіцієнт</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePosition" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePosition" class="form-check-label">Посада</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeUnit" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeUnit" class="form-check-label">Підрозділ</label>
+                        </div>
+                    </div>
+                    <!-- Паспортні дані -->
+                    <div class="col-md-3">
+                        <h6>Паспортні дані</h6>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeIdentificationNumber" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeIdentificationNumber" class="form-check-label">Ідентифікаційний номер</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePassportNumber" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePassportNumber" class="form-check-label">Номер паспорта</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePassportSeries" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePassportSeries" class="form-check-label">Серія паспорта</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePassportIssueDate" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePassportIssueDate" class="form-check-label">Дата видачі паспорта</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePassportIssuePlace" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePassportIssuePlace" class="form-check-label">Місце видачі паспорта</label>
+                        </div>
+                    </div>
+                    <!-- Освіта та наука -->
+                    <div class="col-md-3">
+                        <h6>Освіта та наука</h6>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePersonEducation" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePersonEducation" class="form-check-label">Освіта</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludePersonQualification" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludePersonQualification" class="form-check-label">Кваліфікація</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeDiplomaNumber" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeDiplomaNumber" class="form-check-label">Номер диплома</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeDateOfGraduation" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeDateOfGraduation" class="form-check-label">Дата закінчення</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeCategory" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeCategory" class="form-check-label">Категорія</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeDischarge" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeDischarge" class="form-check-label">Розряд</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeFaculty" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeFaculty" class="form-check-label">Факультет</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeScientificTitle" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeScientificTitle" class="form-check-label">Наукове звання</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeScientificDegree" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeScientificDegree" class="form-check-label">Науковий ступінь</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input asp-for="IncludeSpecialty" class="form-check-input" type="checkbox" />
+                            <label asp-for="IncludeSpecialty" class="form-check-label">Спеціальність</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Згенерувати звіт</button>
+    </form>
+</div>
