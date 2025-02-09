@@ -1,0 +1,98 @@
+﻿@page
+@model HRIS.Pages.VnzListPageModel
+@{
+    ViewData["Title"] = "ВНЗ";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати новий ВНЗ</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/VnzListPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="NewItem.VnzName" class="form-label"></label>
+                        <input asp-for="NewItem.VnzName" class="form-control" />
+                        <span asp-validation-for="NewItem.VnzName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.VnzNameFull" class="form-label"></label>
+                        <input asp-for="NewItem.VnzNameFull" class="form-control" />
+                        <span asp-validation-for="NewItem.VnzNameFull" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.VnzAddress" class="form-label"></label>
+                        <input asp-for="NewItem.VnzAddress" class="form-control" />
+                        <span asp-validation-for="NewItem.VnzAddress" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/VnzListPageModel" asp-route-id="-1">Новий ВНЗ</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>ВНЗ</th>
+                        <th>Повна назва</th>
+                        <th>Адреса</th>
+                        <th>Кількість факультетів</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vnz in Model.Items) {
+                        <tr>
+                            <td>@vnz.VnzName</td>
+                            <td>@vnz.VnzNameFull</td>
+                            <td>@vnz.VnzAddress</td>
+                            <td>@(vnz.Faculties != null ? vnz.Faculties.Count : 0)</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/VnzListPageModel" asp-route-id="@vnz.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування ВНЗ</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/VnzListPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.VnzName" class="form-label"></label>
+                        <input asp-for="CurrentItem.VnzName" class="form-control" />
+                        <span asp-validation-for="CurrentItem.VnzName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.VnzNameFull" class="form-label"></label>
+                        <input asp-for="CurrentItem.VnzNameFull" class="form-control" />
+                        <span asp-validation-for="CurrentItem.VnzNameFull" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.VnzAddress" class="form-label"></label>
+                        <input asp-for="CurrentItem.VnzAddress" class="form-control" />
+                        <span asp-validation-for="CurrentItem.VnzAddress" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+                <div class="mt-4">
+                    <h5>Детальна інформація</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Кількість факультетів</dt>
+                        <dd class="col-sm-9">@(Model.CurrentItem.Faculties != null ? Model.CurrentItem.Faculties.Count : 0)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+</div>

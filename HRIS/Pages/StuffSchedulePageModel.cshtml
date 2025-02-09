@@ -1,0 +1,98 @@
+﻿@page
+@model StuffSchedulePageModel
+@{
+    ViewData["Title"] = "Штатний розклад";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати новий штатний розклад</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/StuffSchedulePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label class="form-label">Підрозділ</label>
+                        <select asp-for="SelectedUnitId" asp-items="Model.Units" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Посада</label>
+                        <select asp-for="SelectedPositionId" asp-items="Model.Positions" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.NumberOfPositions" class="form-label"></label>
+                        <input asp-for="NewItem.NumberOfPositions" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="NewItem.NumberOfPositions" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.NumberOfPositionsOccupied" class="form-label"></label>
+                        <input asp-for="NewItem.NumberOfPositionsOccupied" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="NewItem.NumberOfPositionsOccupied" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/StuffSchedulePageModel" asp-route-id="-1">Новий штатний розклад</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Підрозділ</th>
+                        <th>Посада</th>
+                        <th>Кількість посад</th>
+                        <th>Кількість зайнятих посад</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var schedule in Model.Items) {
+                        <tr>
+                            <td>@schedule.Unit.UnitName</td>
+                            <td>@schedule.Position.PositionName</td>
+                            <td>@schedule.NumberOfPositions</td>
+                            <td>@schedule.NumberOfPositionsOccupied</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/StuffSchedulePageModel" asp-route-id="@schedule.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування штатного розкладу</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/StuffSchedulePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label class="form-label">Підрозділ</label>
+                        <select asp-for="SelectedUnitId" asp-items="Model.Units" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Посада</label>
+                        <select asp-for="SelectedPositionId" asp-items="Model.Positions" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.NumberOfPositions" class="form-label"></label>
+                        <input asp-for="CurrentItem.NumberOfPositions" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="CurrentItem.NumberOfPositions" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.NumberOfPositionsOccupied" class="form-label"></label>
+                        <input asp-for="CurrentItem.NumberOfPositionsOccupied" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="CurrentItem.NumberOfPositionsOccupied" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,75 @@
+﻿@page
+@model HRIS.Pages.UnitPageModel
+@{
+    ViewData["Title"] = "Підрозділи";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати новий підрозділ</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/UnitPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="NewItem.UnitName" class="form-label"></label>
+                        <input asp-for="NewItem.UnitName" class="form-control" />
+                        <span asp-validation-for="NewItem.UnitName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Група підрозділів</label>
+                        <select asp-for="SelectedGroupId" asp-items="Model.Groups" class="form-select"></select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/UnitPageModel" asp-route-id="-1">Новий підрозділ</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Підрозділ</th>
+                        <th>Група</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var unit in Model.Items) {
+                        <tr>
+                            <td>@unit.UnitName</td>
+                            <td>@unit.Group.UnitsGroupName</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/UnitPageModel" asp-route-id="@unit.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування підрозділу</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/UnitPageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.UnitName" class="form-label"></label>
+                        <input asp-for="CurrentItem.UnitName" class="form-control" />
+                        <span asp-validation-for="CurrentItem.UnitName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Група підрозділів</label>
+                        <select asp-for="SelectedGroupId" asp-items="Model.Groups" class="form-select"></select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

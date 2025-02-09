@@ -1,0 +1,77 @@
+﻿@page
+@model ScientificTitlePageModel
+@{
+    ViewData["Title"] = "Наукові звання";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+    @if (Model.NewItem != null) {
+        <div class="card mb-4">
+            <div class="card-header">Додати нове наукове звання</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/ScientificTitlePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="NewItem.Id" type="hidden" value="-1" />
+                    <div class="mb-3">
+                        <label asp-for="NewItem.ScientificTitleName" class="form-label"></label>
+                        <input asp-for="NewItem.ScientificTitleName" class="form-control" />
+                        <span asp-validation-for="NewItem.ScientificTitleName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItem.ScientificTitleNameFull" class="form-label"></label>
+                        <input asp-for="NewItem.ScientificTitleNameFull" class="form-control" />
+                        <span asp-validation-for="NewItem.ScientificTitleNameFull" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    } else if (Model.CurrentItem == null) {
+        <div class="mb-4">
+            <a class="btn btn-primary" asp-area="" asp-page="/ScientificTitlePageModel" asp-route-id="-1">Нове наукове звання</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Наукове звання</th>
+                        <th>Повна назва</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var title in Model.Items) {
+                        <tr>
+                            <td>@title.ScientificTitleName</td>
+                            <td>@title.ScientificTitleNameFull</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/ScientificTitlePageModel" asp-route-id="@title.Id">Деталі</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div class="card">
+            <div class="card-header">Редагування наукового звання</div>
+            <div class="card-body">
+                <form asp-area="" asp-page="/ScientificTitlePageModel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="CurrentItem.Id" type="hidden" />
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.ScientificTitleName" class="form-label"></label>
+                        <input asp-for="CurrentItem.ScientificTitleName" class="form-control" />
+                        <span asp-validation-for="CurrentItem.ScientificTitleName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CurrentItem.ScientificTitleNameFull" class="form-label"></label>
+                        <input asp-for="CurrentItem.ScientificTitleNameFull" class="form-control" />
+                        <span asp-validation-for="CurrentItem.ScientificTitleNameFull" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

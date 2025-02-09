@@ -16,7 +16,7 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
         _context = context;
     }
 
-    public virtual void OnGet(int id) {
+    public void OnGet(int id) {
         if (id == -1) {
             Items = null;
             CurrentItem = null;
@@ -37,19 +37,13 @@ public abstract class CrudPageModel<T> : PageModel where T : Entity, new() {
 
     public virtual IQueryable<T> GetAll() => _context.Set<T>();
 
-    public virtual void PreSave() {
-        
-    }
+    public virtual void PreSave() { }
 
-    public virtual void PreFetch() {
+    public virtual void PreFetch() { }
 
-    }
+    public virtual void PostFetch() { }
 
-    public virtual void PostFetch() {
-
-    }
-
-    public virtual IActionResult OnPost() {
+    public IActionResult OnPost() {
         if (NewItem != null && NewItem.Id == -1) {
             NewItem.Id = 0;
             PreSave();
