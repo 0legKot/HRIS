@@ -1,0 +1,27 @@
+﻿@page
+@model HRIS.Pages.NewEmployeeReportPageModel
+@{
+    ViewData["Title"] = "Звіт по прийнятим співробітникам";
+}
+<h1 class="mb-4">@ViewData["Title"]</h1>
+<div class="card mb-4">
+    <div class="card-header">Згенерувати звіт по прийнятим співробітникам</div>
+    <div class="card-body">
+        <form asp-area="" asp-page="/NewEmployeeReportPage" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label asp-for="SearchCriteria" class="form-label">Співробітник (опційно)</label>
+                <input asp-for="SearchCriteria" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="StartDate" class="form-label">Дата початку</label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="ReportDate" class="form-label">Дата звіту</label>
+                <input asp-for="ReportDate" class="form-control" type="date" />
+            </div>
+            <button type="submit" class="btn btn-success">Згенерувати звіт</button>
+        </form>
+    </div>
+</div>
