@@ -14,7 +14,6 @@ namespace HRIS.Pages {
             _context = context;
         }
 
-        // Фільтри по колонках
         [BindProperty]
         public string FilterPib { get; set; } = string.Empty;
         [BindProperty]
@@ -44,7 +43,7 @@ namespace HRIS.Pages {
         [BindProperty]
         public decimal? FilterWorkingRateMax { get; set; }
 
-        // Колонки для відображення – Основна інформація
+
         [BindProperty]
         public bool IncludePib { get; set; }
         [BindProperty]
@@ -56,7 +55,7 @@ namespace HRIS.Pages {
         [BindProperty]
         public bool IncludePhone { get; set; }
 
-        // Колонки для відображення – Кадрова інформація
+
         [BindProperty]
         public bool IncludePosition { get; set; }
         [BindProperty]
@@ -68,7 +67,7 @@ namespace HRIS.Pages {
         [BindProperty]
         public bool IncludeWorkingRate { get; set; }
 
-        // Колонки для відображення – Паспортні дані
+        
         [BindProperty]
         public bool IncludeIdentificationNumber { get; set; }
         [BindProperty]
@@ -80,7 +79,7 @@ namespace HRIS.Pages {
         [BindProperty]
         public bool IncludePassportIssuePlace { get; set; }
 
-        // Колонки для відображення – Освіта та наука
+        
         [BindProperty]
         public bool IncludePersonEducation { get; set; }
         [BindProperty]
@@ -109,8 +108,7 @@ namespace HRIS.Pages {
             FilterPhone = string.Empty;
             FilterPosition = string.Empty;
             FilterUnit = string.Empty;
-            // За замовчуванням не задаємо часових фільтрів (їх можна задати вручну)
-            // Налаштування колонок – за замовчуванням вибрані основні та кадрові дані
+
             IncludePib = true;
             IncludeFullName = false;
             IncludeBirthDate = false;
@@ -121,13 +119,13 @@ namespace HRIS.Pages {
             IncludeDateEmployment = true;
             IncludeDateDismissal = false;
             IncludeWorkingRate = true;
-            // Паспортні дані
+
             IncludeIdentificationNumber = false;
             IncludePassportNumber = false;
             IncludePassportSeries = false;
             IncludePassportIssueDate = false;
             IncludePassportIssuePlace = false;
-            // Освіта та наука
+
             IncludePersonEducation = false;
             IncludePersonQualification = false;
             IncludeDiplomaNumber = false;
