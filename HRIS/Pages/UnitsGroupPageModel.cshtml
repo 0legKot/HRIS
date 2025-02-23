@@ -27,7 +27,7 @@
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="table-light">
+                <thead class="table-dark">
                     <tr>
                         <th>Група підрозділів</th>
                         <th>Кількість підрозділів</th>
@@ -40,7 +40,7 @@
                             <td>@group.UnitsGroupName</td>
                             <td>@(group.Units != null ? group.Units.Count : 0)</td>
                             <td>
-                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/UnitsGroupPageModel" asp-route-id="@group.Id">Деталі</a>
+                                <a class="btn btn-sm btn-secondary" asp-area="" asp-page="/UnitsGroupPageModel" asp-route-id="@group.Id">Деталі→</a>
                             </td>
                         </tr>
                     }

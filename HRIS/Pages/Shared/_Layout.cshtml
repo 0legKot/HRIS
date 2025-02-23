@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,54 +7,183 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HRIS.styles.css" asp-append-version="true" />
+    <style>
+        h1 {
+            display:none;
+        }
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        .navbar-dark .navbar-brand,
+        .navbar-dark .navbar-nav .nav-link,
+        .navbar-dark .dropdown-item {
+            color: #f8f9fa !important;
+        }
+
+            .navbar-dark .navbar-nav .nav-link:hover,
+            .navbar-dark .dropdown-menu .dropdown-item:hover {
+                color: #f8f9fa !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+            }
+
+        .login-partial, .login-partial a {
+            color: #f8f9fa !important;
+        }
+
+        .card {
+            background-color: #454d55;
+            color: #f8f9fa;
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        
+        .form-control, .form-select {
+            background-color: #343a40;
+            color: #f8f9fa;
+            border-color: #495057;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+            .form-control:focus, .form-select:focus {
+                background-color: #343a40;
+                color: #f8f9fa;
+                border-color: #80bdff;
+            }
+        
+        .table {
+            
+            color: #f8f9fa !important;
+            border-color: transparent;
+        }
+
+            .table th {
+                
+            }
+
+            .table td {
+                background-color: #454d55;
+                color: #f8f9fa;
+            }
+
+        
+
+        .btn-primary {
+            background-color: transparent !important;
+            border-color: #ff9900 !important;
+            color: #fff !important;
+        }
+
+            .btn-primary:hover {
+                background-color: #e68a00 !important; 
+                border-color: #e68a00 !important;
+            }
+
+        .btn-secondary{
+            background-color: transparent !important;
+            border-color: #00B7EB !important;
+            color: #fff !important;
+        }
+
+            .btn-secondary:hover {
+                background-color: #00B7EB !important;
+                border-color: #00B7EB !important;
+        }
+
+        .btn-success {
+            background-color: transparent !important;
+            border-color: #008000 !important;
+            color: #fff !important;
+        }
+
+            .btn-success:hover {
+                background-color: #008000 !important;
+                border-color: #008000 !important;
+            }
+        .table {
+           
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #454d55;
+        }
+
+        .table tbody tr td:first-child {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        .table tbody tr td:last-child {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .table thead th:first-child {
+            border-top-left-radius: 20px;
+        }
+
+        .table thead th:last-child {
+            border-top-right-radius: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">HRIS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between bg-dark">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="menu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Довiдники</a>
-                            <ul class="dropdown-menu" aria-labelledby="menu1">
-                                <li><a class="dropdown-item" asp-area="" asp-page="/EmployeesPageModel">Співробітники</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/FacultyPageModel">Факультети</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/PersonPageModel">Фiзичнi особи</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/PositionPageModel">Посади</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/ScientificDegreePageModel">Освiтнiй рiвень</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/ScientificTitlePageModel">Науковi звання</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/SpecialtyPageModel">Спецiальностi</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/StuffSchedulePageModel">Розклад</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/UnitPageModel">Пiдроздiли</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/UnitsGroupPageModel">Вiддiли</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/VnzListPageModel">Навчальнi заклади</a></li>
-                                
+                            <a class="nav-link dropdown-toggle" href="#" id="menu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Довідники
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="menu1">
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/EmployeesPageModel">Співробітники</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/FacultyPageModel">Факультети</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/PersonPageModel">Фізичні особи</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/PositionPageModel">Посади</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/ScientificDegreePageModel">Освітній рівень</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/ScientificTitlePageModel">Наукові звання</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/SpecialtyPageModel">Спеціальності</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/StuffSchedulePageModel">Розклад</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/UnitPageModel">Підрозділи</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/UnitsGroupPageModel">Відділи</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/VnzListPageModel">Навчальні заклади</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="menu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">Документи</a>
-                            <ul class="dropdown-menu" aria-labelledby="menu2">
-                                <li><a class="dropdown-item" asp-area="" asp-page="/DismissalPageModel">Звiльнення</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/EmploymentPageModel">Прийом</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/JobChangePageModel">Перемiщення</a></li>
+                            <a class="nav-link dropdown-toggle" href="#" id="menu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Документи
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="menu2">
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/DismissalPageModel">Звільнення</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/EmploymentPageModel">Прийом</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/JobChangePageModel">Переміщення</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="menu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">Звiти</a>
-                            <ul class="dropdown-menu" aria-labelledby="menu3">
-                                <li><a class="dropdown-item" asp-area="" asp-page="/CurrentEmployeeReportPageModel">Кадровий</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/NewEmployeeReportPageModel">Прийнятi</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/DismissedEmployeeReportPageModel">Звiльненi</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/DynamicEmployeeReportPageModel">Динамiчний</a></li>
+                            <a class="nav-link dropdown-toggle" href="#" id="menu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Звіти
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="menu3">
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/CurrentEmployeeReportPageModel">Кадровий</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/NewEmployeeReportPageModel">Прийняті</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/DismissedEmployeeReportPageModel">Звільнені</a></li>
+                                <li><a class="dropdown-item bg-dark" asp-area="" asp-page="/DynamicEmployeeReportPageModel">Динамічний</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <partial name="_LoginPartial" class="login-partial" />
                 </div>
             </div>
         </nav>
@@ -64,17 +193,14 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - HRIS
         </div>
     </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

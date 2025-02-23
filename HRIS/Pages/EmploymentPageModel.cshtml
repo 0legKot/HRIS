@@ -45,11 +45,13 @@
         </div>
     </div>
 } else if (Model.CurrentItem == null) {
+    <br/>
     <div class="mb-4">
         <a class="btn btn-primary" asp-area="" asp-page="/EmploymentPageModel" asp-route-id="-1">Додати нового співробітника</a>
     </div>
-    <div class="text-center table-responsive">
+    <div class="table-responsive">
         <table class="table table-bordered table-striped">
+            <thead class="table-dark">
             <tr>
                 <th>Дата прийняття на роботу</th>
                 <th>Співробітник</th>
@@ -58,6 +60,8 @@
                 <th>Зарплатний коефіцієнт</th>
                 <th>Плюралізм</th>
             </tr>
+            </thead>
+            <tbody>
             @foreach (var item in Model.Items!) {
                 <tr>
                     <td>@item.EmploymentDate.ToString("dd.MM.yyyy")</td>
@@ -68,6 +72,7 @@
                     <td>@item.Pluralist</td>
                 </tr>
             }
+            </tbody>
         </table>
     </div>
 } 
