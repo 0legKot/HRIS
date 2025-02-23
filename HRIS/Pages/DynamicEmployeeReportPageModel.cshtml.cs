@@ -91,6 +91,8 @@ namespace HRIS.Pages {
         [BindProperty]
         public bool IncludeCategory { get; set; }
         [BindProperty]
+        public bool IncludeIsMale { get; set; }
+        [BindProperty]
         public bool IncludeDischarge { get; set; }
         [BindProperty]
         public bool IncludeFaculty { get; set; }
@@ -206,6 +208,8 @@ namespace HRIS.Pages {
                 html += "<th>ПІБ</th>";
             if (IncludeFullName)
                 html += "<th>Повне ім'я</th>";
+            if (IncludeIsMale)
+                html += "<th>Чоловiк?</th>";
             if (IncludeBirthDate)
                 html += "<th>Дата народження</th>";
             if (IncludeResidence)
@@ -259,6 +263,10 @@ namespace HRIS.Pages {
                     html += $"<td>{emp.EmployeePerson.PersonName}</td>";
                 if (IncludeFullName)
                     html += $"<td>{emp.EmployeePerson.PersonNameFull}</td>";
+                if (IncludeIsMale) {
+                    var tmp = emp.EmployeePerson.IsMale ? "Так" : "Нi";
+                    html += $"<td>{tmp}</td>";
+                }
                 if (IncludeBirthDate)
                     html += $"<td>{emp.EmployeePerson.BirthDate.ToString("dd.MM.yyyy")}</td>";
                 if (IncludeResidence)
